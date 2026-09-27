@@ -16,7 +16,10 @@ app = FastAPI(
     title="AI-Powered Government & Public Service Assistant",
     description="Class 10 Student Government Schemes Module",
     version="1.0.0",
-    lifespan=lifespan
+    lifespan=lifespan,
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json"
 )
 
 # CORS configuration
@@ -31,12 +34,14 @@ app.add_middleware(
 app.include_router(schemes_router)
 
 @app.get("/")
+@app.get("/api")
+@app.get("/api/")
 async def root():
     return {
         "title": "AI-Powered Government & Public Service Assistant",
         "module": "Class 10 Student Government Schemes",
         "status": "Online",
-        "docs_url": "/docs"
+        "docs_url": "/api/docs"
     }
 
 if __name__ == "__main__":
